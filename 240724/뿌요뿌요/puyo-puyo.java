@@ -25,6 +25,7 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
+                if (visited[i][j]) continue;
                 cnt = 0;
                 DFS(i, j, matrix[i][j]);
                 if (cnt >= 4) {
