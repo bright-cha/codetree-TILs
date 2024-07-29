@@ -17,8 +17,8 @@ public class Main {
             que.offerFirst(num);
         }
 
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < 3; j++) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < n; j++) {
                 System.out.print(que.poll() + " ");
             }
             System.out.println();
