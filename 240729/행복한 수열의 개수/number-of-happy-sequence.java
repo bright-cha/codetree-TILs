@@ -19,12 +19,12 @@ public class Main {
         for (int i = 0; i < n; i++) {
             int rowNum = matrix[0][i];
             int colNum = matrix[i][0];
-            int rowCnt = 1;
-            int colCnt = 1;
+            int rowCnt = 0;
+            int colCnt = 0;
             boolean rowCheck = false;
             boolean colCheck = false;
 
-            for (int j = 1; j < n; j++) {
+            for (int j = 0; j < n; j++) {
 
                 if (matrix[i][j] == colNum) {
                     colCnt++;
