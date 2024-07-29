@@ -21,6 +21,8 @@ public class Main {
             int colNum = matrix[i][0];
             int rowCnt = 1;
             int colCnt = 1;
+            boolean rowCheck = false;
+            boolean colCheck = false;
 
             for (int j = 1; j < n; j++) {
 
@@ -38,15 +40,18 @@ public class Main {
                     rowNum = matrix[j][i];
 
                 }
+
+                if (rowCnt >= m) {
+                    rowCheck = true;
+                }
+
+                if (colCnt >= m) {
+                    colCheck = true;
+                }
             }
 
-            if (rowCnt >= m) {
-                ans++;
-            }
-
-            if (colCnt >= m) {
-                ans++;
-            }
+            if (rowCheck) ans++;
+            if (colCheck) ans++;
         }
 
         System.out.println(ans);
