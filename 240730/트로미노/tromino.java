@@ -1,75 +1,76 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
-    static int n, m;
-    static int ans = 0;
-    static int[][] matrix;
+    public static final int MAX_NUM = 200;
+    
+    public static int n, m;
+    public static int[][] grid = new int[MAX_NUM][MAX_NUM];
+    
+    // 가능한 모든 모양을 전부 적어줍니다.
+    public static int[][][] shapes = new int[][][]{
+        {{1, 1, 0},
+        {1, 0, 0},
+        {0, 0, 0}},
+    
+        {{1, 1, 0},
+        {0, 1, 0},
+        {0, 0, 0}},
+    
+        {{1, 0, 0},
+        {1, 1, 0},
+        {0, 0, 0}},
+    
+        {{0, 1, 0},
+        {1, 1, 0},
+        {0, 0, 0}},
+    
+        {{1, 1, 1},
+        {0, 0, 0},
+        {0, 0, 0}},
+    
+        {{1, 0, 0},
+        {1, 0, 0},
+        {1, 0, 0}},
+    };
+    
+    // 주어진 위치에 대하여 가능한 모든 모양을 탐색하며 최대 합을 반환합니다.
+    public static int getMaxSum(int x, int y) {
+        int maxSum = 0;
+        
+        for(int i = 0; i < 6; i++) {
+            boolean isPossible = true;
+            int sum = 0;
+            for(int dx = 0; dx < 3; dx++)
+                for(int dy = 0; dy < 3; dy++) {
+                    if(shapes[i][dx][dy] == 0) continue;
+                    if(x + dx >= n || y + dy >= m) isPossible = false;
+                    else sum += grid[x + dx][y + dy];
+                }
+    
+            if(isPossible)
+                maxSum = Math.max(maxSum, sum);
+        }
+        
+        return maxSum;
+    }
 
     public static void main(String[] args) {
-        init();
-
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                check1(i, j);
-                check2(i, j);
-            }
-        }
-
-        System.out.println(ans);
-    }
-
-    private static void init() {
         Scanner sc = new Scanner(System.in);
+
         n = sc.nextInt();
         m = sc.nextInt();
-        matrix = new int[n][m];
-
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                matrix[i][j] = sc.nextInt();
-            }
-        }
-    }
-
-    private static void check1(int row, int col) {
-        // ㄴ 모양
-        if(inScope(row - 1, col) && inScope(row, col + 1)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row - 1][col] + matrix[row][col + 1]);
-        }
-
-        // 90도 돌린 모양
-        if(inScope(row + 1, col) && inScope(row, col + 1)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row + 1][col] + matrix[row][col + 1]);
-        }
-
-        // 180도 돌린 모양
-        if(inScope(row + 1, col) && inScope(row, col - 1)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row + 1][col] + matrix[row][col - 1]);
-        }
-
-        // 270도 돌린 모양
-        if(inScope(row - 1, col) && inScope(row, col - 1)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row - 1][col] + matrix[row][col - 1]);
-        }
-
-    }
-
-    private static void check2(int row, int col) {
-        // 가로
-        if(inScope(row, col + 2)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row][col + 1] + matrix[row][col + 2]);
-        }
-
-        // 세로
-        if(inScope(row + 2, col)) {
-            ans = Math.max(ans, matrix[row][col] + matrix[row + 1][col] + matrix[row + 2][col]);
-        }
-    }
-
-    private static boolean inScope(int row, int col) {
-        if (0 <= row && row < n && 0 <= col && col < m) 
-            return true;
-        else
-            return false;
+        
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                grid[i][j] = sc.nextInt();
+        
+        int ans = 0;
+        
+        // 격자의 각 위치에 대하여 탐색하여줍니다.
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                ans = Math.max(ans, getMaxSum(i, j));
+        
+        System.out.print(ans);
     }
 }
