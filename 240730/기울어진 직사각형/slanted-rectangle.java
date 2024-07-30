@@ -36,6 +36,7 @@ public class Main {
     }
 
     public static void solve(int row, int col, int dir, int value) {
+        if(dir == 2 && row >= startRow) return;
         if(matrix[startRow][startCol] < value) {
             if(startRow == row && startCol == col) {
                 ans = Math.max(value, ans);
