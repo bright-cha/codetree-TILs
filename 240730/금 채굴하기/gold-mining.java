@@ -44,7 +44,7 @@ public class Main {
     }
 
     private static void solve(int row, int col) {
-        for(int k = 0; k <= 2 * (n - 1); k++) {
+        for(int k = 0; k <= n; k++) {
             int gold = 0;
 
             for(int i = -k; i <= k; i++) {
