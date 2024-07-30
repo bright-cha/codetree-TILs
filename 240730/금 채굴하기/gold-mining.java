@@ -1,52 +1,71 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    public static final int MAX_NUM = 20;
-    
-    public static int n, m;
-    public static int[][] grid = new int[MAX_NUM][MAX_NUM];
-    
-    // 주어진 k에 대하여 마름모의 넓이를 반환합니다.
-    public static int getArea(int k) {
-        return k * k + (k+1) * (k+1); 
-    }
-    
-    // 주어진 k에 대하여 채굴 가능한 금의 개수를 반환합니다.
-    public static int getNumOfGold(int row, int col, int k) {
-        int numOfGold = 0;
-    
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                if(Math.abs(row - i) + Math.abs(col - j) <= k)
-                    numOfGold += grid[i][j];
-    
-        return numOfGold;
-    }
+    static int n, m;
+    static int ans = 0;
+    static int maxProfit = 0;
+    static int[][] matrix;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int maxGold = 0;
+        init();
 
-        // 입력:
-        n = sc.nextInt();
-        m = sc.nextInt();
-        for(int row = 0; row < n; row++)
-            for(int col = 0; col < n; col++)
-                grid[row][col] = sc.nextInt();
-
-        // 격자의 각 위치가 마름모의 중앙일 때 채굴 가능한 금의 개수를 구합니다.
-        for(int row = 0; row < n; row++) {
-            for(int col = 0; col < n; col++) {
-                for(int k = 0; k <= 2 * (n-1); k++) {
-                    int numOfGold = getNumOfGold(row, col, k);
-
-                    // 손해를 보지 않으면서 채굴할 수 있는 최대 금의 개수를 저장합니다.
-                    if(numOfGold * m >= getArea(k))
-                        maxGold = Math.max(maxGold, numOfGold);
-                }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                solve(i, j);
             }
         }
 
-        System.out.print(maxGold);
+        System.out.print(ans);
+    }
+
+    private static void init() {
+        Scanner sc = new Scanner(System.in);
+
+        n = sc.nextInt();
+        m = sc.nextInt();
+
+        matrix = new int[n][n];
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+    }
+
+    private static boolean inScope(int row, int col) {
+        if (0 <= row && row < n && 0 <= col && col < n)
+            return true;
+        return false;
+    }
+
+    private static int findOutCost(int ground) {
+        return ground * ground + (ground + 1) * (ground + 1);
+    }
+
+    private static void solve(int row, int col) {
+        for(int k = 0; k <= 2 * (n - 1); k++) {
+            int ground = 0;
+            int gold = 0;
+
+            for(int i = -k; i <= k; i++) {
+                for(int j = -k; j <= k; j++) {
+                    if (Math.abs(i) + Math.abs(j) > k) continue;
+                    int nx = row + i;
+                    int ny = col + j;
+
+                    if (inScope(nx, ny)) {
+                        ground++;
+                        if (matrix[nx][ny] == 1) gold++;
+                    }
+                }
+            }
+
+            if(gold * m - findOutCost(k) >= 0) {
+                ans = Math.max(ans, gold);
+            }
+        }
+        
+
     }
 }
