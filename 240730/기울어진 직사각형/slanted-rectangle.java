@@ -48,11 +48,11 @@ public class Main {
                 tempRow = nx;
                 tempCol = ny;
 
+                if(sumValue > matrix[row][col] && tempRow == row && tempCol == col) {
+                    ans = Math.max(ans, sumValue);
+                    break;
+                }
             }
-        }
-
-        if(sumValue > matrix[row][col] && tempRow == row && tempCol == col) {
-            ans = Math.max(ans, sumValue);
         }
     }
 
