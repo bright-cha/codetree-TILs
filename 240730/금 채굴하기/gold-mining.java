@@ -45,7 +45,6 @@ public class Main {
 
     private static void solve(int row, int col) {
         for(int k = 0; k <= 2 * (n - 1); k++) {
-            int ground = 0;
             int gold = 0;
 
             for(int i = -k; i <= k; i++) {
@@ -55,7 +54,6 @@ public class Main {
                     int ny = col + j;
 
                     if (inScope(nx, ny)) {
-                        ground++;
                         if (matrix[nx][ny] == 1) gold++;
                     }
                 }
