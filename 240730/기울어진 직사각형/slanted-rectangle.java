@@ -8,11 +8,13 @@ public class Main {
     public static void main(String[] args) {
         init();
 
-        for(int i = 1; i < n - 1; i++) {
-            for(int j = 1; j < n - 1; j++) {
-                solve(i + 1, j);
-            }
-        }
+        // for(int i = 1; i < n - 1; i++) {
+        //     for(int j = 1; j < n - 1; j++) {
+        //         solve(i + 1, j);
+        //     }
+        // }
+
+        solve(3, 1);
 
         System.out.println(ans);
     }
@@ -58,7 +60,7 @@ public class Main {
 
     public static boolean inRange(int row, int col) {
         if(0 <= row && row < n && 0 <= col && col < n) {
-            if((row == 0 || row == n || row == -n) && (col == 0 || col == n || col == -n)) return false;
+            if((row == 0 || row == n - 1 || row == -(n - 1)) && (col == 0 || col == n - 1 || col == -(n - 1))) return false;
             return true;
         }
         return false;
