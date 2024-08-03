@@ -4,8 +4,8 @@ public class Main {
     static int n;
     static int ans = 0;
     static int[][] grid;
-    static int[] startX = {1, 1, n - 1, 0};
-    static int[] startY = {0, n - 1, 1, 1};
+    static int[] startX;
+    static int[] startY;
     // 오, 왼, 위, 아래
     static int[] dx = {0, 0, -1, 1};
     static int[] dy = {1, -1, 0, 0};
@@ -24,11 +24,11 @@ public class Main {
 
     private static void solve(int dir, int idx) {
         int time = 1;
-
         int x = startX[dir];
         int y = startY[dir];
-        if(x == 1) x *= idx;
-        if(y == 1) y *= idx;
+
+        if(dir == 0 || dir == 1) x *= idx;
+        if(dir == 2 || dir == 3) y *= idx;
 
         while(inRange(x, y)) {
             if(grid[x][y] == 1) dir = meetOne(dir);
@@ -81,6 +81,9 @@ public class Main {
 
         n = sc.nextInt();
         grid = new int[n][n];
+
+        startX = new int[] {1, 1, n - 1, 0};
+        startY = new int[] {0, n - 1, 1, 1};
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
