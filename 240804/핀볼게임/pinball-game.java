@@ -4,8 +4,8 @@ public class Main {
     static int n;
     static int ans = 0;
     static int[][] grid;
-    static int[] startX = {1, 1, n, 0};
-    static int[] startY = {0, n, 1, 1};
+    static int[] startX = {1, 1, n - 1, 0};
+    static int[] startY = {0, n - 1, 1, 1};
     // 오, 왼, 위, 아래
     static int[] dx = {0, 0, -1, 1};
     static int[] dy = {1, -1, 0, 0};
@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static void solve(int dir, int idx) {
-        int time = 2;
+        int time = 1;
 
         int x = startX[dir];
         int y = startY[dir];
@@ -31,12 +31,11 @@ public class Main {
         if(y == 1) y *= idx;
 
         while(inRange(x, y)) {
-            x += dx[dir];
-            y += dy[dir];
-
-            if(!inRange(x, y)) break;
             if(grid[x][y] == 1) dir = meetOne(dir);
             if(grid[x][y] == 2) dir = meetTwo(dir);
+
+            x += dx[dir];
+            y += dy[dir];
 
             time++;
         }
