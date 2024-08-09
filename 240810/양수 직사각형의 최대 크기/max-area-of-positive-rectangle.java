@@ -27,16 +27,15 @@ public class Main {
 
     public static void checkSize(int x1, int y1, int x2, int y2) {
         int size = 0;
-        int sum = 0;
 
         for(int i = x1; i <= x2; i++) {
             for(int j = y1; j <= y2; j++) {
-                sum += grid[i][j];
+                if(grid[i][j] <= 0) return;
                 size++;
             }
         }
 
-        if(sum > 0) {
+        if(size > 0) {
             ans = Math.max(ans, size);
         }
     }
