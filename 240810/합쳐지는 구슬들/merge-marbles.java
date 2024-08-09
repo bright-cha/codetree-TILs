@@ -1,154 +1,136 @@
-import java.util.Scanner;
-
-class Tuple {
-    int x, y, z;
-    public Tuple(int x, int y, int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-}
+import java.util.*;
 
 public class Main {
-    public static final Tuple EMPTY = new Tuple(0, 0, 0);
-    public static final int DIR_NUM = 4;
-    public static final int ASCII_NUM = 128;
-    public static final int MAX_N = 50;
-    
-    public static int n, m, t;
-    public static Tuple[][] grid = new Tuple[MAX_N][MAX_N];
-    public static Tuple[][] nextGrid = new Tuple[MAX_N][MAX_N];
-    
-    public static boolean inRange(int x, int y) {
-        return 0 <= x && x < n && 0 <= y && y < n;
-    }
-    
-    public static Tuple NextPos(int x, int y, int moveDir) {
-        int[] dx = new int[]{-1, 0, 0, 1};
-        int[] dy = new int[]{0, 1, -1, 0};
-        
-        int nx = x + dx[moveDir], ny = y + dy[moveDir];
-        if(!inRange(nx, ny))
-            moveDir = 3 - moveDir;
-        else {
-            x = nx; y = ny;
-        }
-        
-        return new Tuple(x, y, moveDir);
-    }
-    
-    // (x, y) 위치에 새로운 구슬이 들어왔을 때 갱신을 진행합니다.
-    public static void update(int x, int y, Tuple newMarble) {
-        // 기존 구슬 정보입니다.
-        int num = nextGrid[x][y].x;
-        int weight = nextGrid[x][y].y;
-        int moveDir = nextGrid[x][y].z;
-        
-        // 새롭게 들어온 구슬 정보입니다.
-        int newNum = newMarble.x;
-        int newWeight = newMarble.y;
-        int newDir = newMarble.z;
-        
-        // 새로 들어온 구슬이 더 우선순위가 높다면
-        // 번호와 방향은 새로운 구슬을 따르게 됩니다.
-        if(newNum > num) 
-            nextGrid[x][y] = new Tuple(newNum, weight + newWeight, newDir);
-        // 기존 구슬의 우선순위가 더 높다면
-        // 무게만 더해집니다.
-        else
-            nextGrid[x][y] = new Tuple(num, weight + newWeight, moveDir);
-    }
-    
-    public static void move(int x, int y) {
-        int num = grid[x][y].x;
-        int weight = grid[x][y].y;
-        int moveDir = grid[x][y].z;
-        
-        // Step1. 현재 구슬의 다음 위치와 방향을 구합니다.
-        Tuple nextPos = NextPos(x, y, moveDir);
-        int nx = nextPos.x;
-        int ny = nextPos.y;
-        int nextDir = nextPos.z;
-        
-        // Step2. 구슬을 옮겨줍니다.
-        update(nx, ny, new Tuple(num, weight, nextDir));
-    }
-    
-    public static void simulate() {
-        // Step1. nextGrid를 초기화합니다.
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                nextGrid[i][j] = EMPTY;
-        
-        // Step2. 각 구슬들을 한 칸씩 움직여줍니다.
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                if(grid[i][j].x != EMPTY.x || grid[i][j].y != EMPTY.y || grid[i][j].z != EMPTY.z)
-                    move(i, j);
-    
-        // Step3. nextGrid 값을 grid로 옮겨줍니다.
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                grid[i][j] = nextGrid[i][j];
-    }
-    
-    public static int getMarbleNum() {
-        int cnt = 0;
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                if(grid[i][j] != EMPTY)
-                    cnt++;
-        
-        return cnt;
-    }
-    
-    public static int getMaxWeight() {
-        int maxWeight = 0;
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                if(grid[i][j] != EMPTY) {
-                    int weight = grid[i][j].y;
-                    maxWeight = Math.max(maxWeight, weight);
-                }
-    
-        return maxWeight;
-    }
+    static int n, m, t;
+    static int[] ans = new int[2];
+    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {1, 0, -1, 0};
+    static Bead[] beads;
+    static int[][] grid;
 
     public static void main(String[] args) {
+        init();
+
+        while(t-- > 0) {
+            move();
+            check();
+        }
+
+        System.out.println(ans[0] + " " + ans[1]);
+    }
+
+    public static void check() {
+        for(int i = 1; i <= m; i++) {
+            if(beads[i] == null) continue;
+
+            Bead bead = beads[i];
+            int x = bead.row;
+            int y = bead.col;
+
+            if(grid[x][y] != 0) {
+                Bead bead2 = beads[grid[x][y]];
+
+                int bigNum;
+                int newDir;
+                int newWeight = bead.weight + bead2.weight;
+
+                if(bead.num > bead2.num) {
+                    bigNum = bead.num;
+                    newDir = bead.dir;
+                    beads[bead2.num] = null;
+                } else {
+                    bigNum = bead2.num;
+                    newDir = bead2.dir;
+                    beads[bead.num] = null;
+                }
+
+                beads[bigNum] = new Bead(bigNum, x, y, newDir, newWeight);
+                ans[0]--;
+                ans[1] = Math.max(ans[1], newWeight);
+                grid[x][y] = bigNum;
+                continue;
+            }
+            grid[x][y] = bead.num;
+        }
+    }
+
+    public static void move() {
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if(grid[i][j] == 0) continue;
+                int num = grid[i][j];
+                Bead bead = beads[num];
+                int nx = i + dx[bead.dir];
+                int ny = j + dy[bead.dir];
+
+                if(inRange(nx, ny)) {
+                    bead.row = nx;
+                    bead.col = ny;
+                } else {
+                    bead.dir = (bead.dir + 2) % 4;
+                }
+
+                grid[i][j] = 0;
+            }
+        }
+    }
+
+    public static boolean inRange(int x, int y) {
+        if (0 <= x && x < n && 0 <= y && y < n) return true;
+        return false;
+    }
+
+    public static void init() {
         Scanner sc = new Scanner(System.in);
+
         n = sc.nextInt();
         m = sc.nextInt();
         t = sc.nextInt();
+        grid = new int[n][n];
+        beads = new Bead[m + 1];
+        ans[0] = m;
 
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                grid[i][j] = new Tuple(0, 0, 0);
-        
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                nextGrid[i][j] = new Tuple(0, 0, 0);
-        
-        int[] dirMapper = new int[ASCII_NUM];
-        dirMapper['U'] = 0;
-        dirMapper['R'] = 1;
-        dirMapper['L'] = 2;
-        dirMapper['D'] = 3;
-        
-        for(int i = 0; i < m; i++) {
-            int r = sc.nextInt();
-            int c = sc.nextInt();
-            char d = sc.next().charAt(0);
+        for(int i = 1; i <= m; i++) {
+            int r = sc.nextInt() - 1;
+            int c = sc.nextInt() - 1;
+            String d = sc.next();
+            int dir = 0;
+            switch(d) {
+                case "R":
+                    dir = 0;
+                    break;
+                case "D":
+                    dir = 1;
+                    break;
+                case "L":
+                    dir = 2;
+                    break;
+                case "U":
+                    dir = 3;
+                    break;
+            }
             int w = sc.nextInt();
-            grid[r - 1][c - 1] = new Tuple(i + 1, w, dirMapper[d]);
+
+            beads[i] = new Bead(i, r, c, dir, w);
+            grid[r][c] = i;
+            ans[1] = Math.max(ans[1], w);
         }
-        
-        // t초에 걸쳐 시뮬레이션을 진행합니다.
-        while(t-- > 0)
-            simulate();
-        
-        int marbleNum = getMarbleNum();
-        int maxWeight = getMaxWeight();
-        
-        System.out.print(marbleNum + " " + maxWeight);
+
+    }
+
+    public static class Bead {
+        int num;
+        int row;
+        int col;
+        int dir;
+        int weight;
+
+        public Bead(int num, int row, int col, int dir, int weight) {
+            this.num = num;
+            this.row = row;
+            this.col = col;
+            this.dir = dir;
+            this.weight = weight;
+        }
     }
 }
