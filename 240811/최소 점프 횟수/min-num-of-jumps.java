@@ -13,6 +13,7 @@ public class Main {
     }
 
     private static void solve(int cnt, int local) {
+        if(local >= n) return;
         if(local == n - 1) {
             ans = Math.min(ans, cnt);
             return;
