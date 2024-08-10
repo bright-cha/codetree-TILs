@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     static String str;
-    static int ans = 0;
+    static int ans = Integer.MIN_VALUE;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -35,7 +35,7 @@ public class Main {
         for(int i = 1; i <= 4; i++) {
             charToInt[local] = i;
             solve(local + 1, charToInt);
-            charToInt[local] = 0;
+            charToInt[local] = 1;
         }
     }
 }
