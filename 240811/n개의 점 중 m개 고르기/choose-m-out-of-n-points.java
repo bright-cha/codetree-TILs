@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     static int n, m;
-    static double ans = Double.MAX_VALUE;
+    static int ans = Integer.MAX_VALUE;
     static int[][] nodeArr;
     static int[] mArr;
 
@@ -10,29 +10,27 @@ public class Main {
         init();
         solve(0);
         
-        System.out.println((int) Math.pow(ans, 2));
+        System.out.println(ans);
     }
 
     private static void solve(int cnt) {
         if(cnt == m) {
-            double tempDist = Double.MIN_VALUE;
-            int one = 0;
-            int two = 0;
-
+            int tempDist = Integer.MIN_VALUE;
 
             for(int i = 0; i < m; i++) {
                 for(int j = i + 1; j < m; j++) {
-                    double currentDist = uclidian(mArr[i], mArr[j]);
-                    if(currentDist > tempDist) {
-                        tempDist = currentDist;
-                        one = mArr[i];
-                        two = mArr[j];
-                    }
+
+                    if(mArr[i] == mArr[j]) continue;
+                    
+                    int currentDist = uclidian(mArr[i], mArr[j]);
+                    tempDist = Math.max(tempDist, currentDist);
                 }
             }
 
-            if(one == two) return;
-            ans = Math.min(ans, uclidian(one, two));
+            if(tempDist == Integer.MIN_VALUE) return;
+            
+            ans = Math.min(ans, tempDist);
+            
             return;
         }
 
@@ -42,13 +40,13 @@ public class Main {
         }
     }
 
-    private static double uclidian(int one, int two) {
+    private static int uclidian(int one, int two) {
         int x1 = nodeArr[one][0];
         int y1 = nodeArr[one][1];        
         int x2 = nodeArr[two][0];
         int y2 = nodeArr[two][1];
 
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        return (int) Math.pow(x1 - x2, 2) + (int) Math.pow(y1 - y2, 2);
     }
 
     private static void init() {
