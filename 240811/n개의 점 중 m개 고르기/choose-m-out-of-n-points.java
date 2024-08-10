@@ -29,7 +29,7 @@ public class Main {
             return;
         }
 
-        for(int i = 0; i < n; i++) {
+        for(int i = cnt; i < n; i++) {
             if(visited[i]) continue;
             visited[i] = true;
             mArr[cnt] = i;
