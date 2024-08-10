@@ -15,7 +15,7 @@ public class Main {
     }
 
     private static void solve(int idx, int cnt) {
-        if(idx == n) {
+        if(idx == n || cnt == m) {
             if(cnt != m) return;
             int tempDist = Integer.MIN_VALUE;
 
@@ -29,7 +29,6 @@ public class Main {
             ans = Math.min(ans, tempDist);
             return;
         }
-        if(cnt == m) return;
 
         mArr[cnt] = idx;
         solve(idx + 1, cnt + 1);
