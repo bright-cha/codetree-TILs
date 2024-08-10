@@ -9,13 +9,14 @@ public class Main {
 
     public static void main(String[] args) {
         init();
-        solve(0);
+        solve(0, 0);
         
         System.out.println(ans);
     }
 
-    private static void solve(int cnt) {
-        if(cnt == m) {
+    private static void solve(int idx, int cnt) {
+        if(idx == n) {
+            if(cnt != m) return;
             int tempDist = Integer.MIN_VALUE;
 
             for(int i = 0; i < m; i++) {
@@ -29,13 +30,9 @@ public class Main {
             return;
         }
 
-        for(int i = cnt; i < n; i++) {
-            if(visited[i]) continue;
-            visited[i] = true;
-            mArr[cnt] = i;
-            solve(cnt + 1);
-            visited[i] = false;
-        }
+        mArr[cnt] = idx;
+        solve(idx + 1, cnt + 1);
+        solve(idx + 1, cnt);
     }
 
     private static int uclidian(int one, int two) {
@@ -59,6 +56,5 @@ public class Main {
             nodeArr[i][0] = sc.nextInt();
             nodeArr[i][1] = sc.nextInt();
         }
-        
     }
 }
