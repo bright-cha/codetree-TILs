@@ -29,6 +29,7 @@ public class Main {
             ans = Math.min(ans, tempDist);
             return;
         }
+        if(cnt == m) return;
 
         mArr[cnt] = idx;
         solve(idx + 1, cnt + 1);
