@@ -15,11 +15,22 @@ public class Main {
 
     private static void solve(int cnt) {
         if(cnt == m) {
+            int tempDist = 0;
+            int one = 0;
+            int two = 0;
+
             for(int i = 0; i < m; i++) {
                 for(int j = i + 1; j < m; j++) {
-                    uclidian(i, j);
+                    int currentDist = uclidian(i, j);
+                    if(currentDist > tempDist) {
+                        tempDist = currentDist;
+                        one = i;
+                        two = j;
+                    }
                 }
             }
+
+            ans = Math.min(ans, uclidian(one, two));
             return;
         }
 
@@ -29,14 +40,13 @@ public class Main {
         }
     }
 
-    private static void uclidian(int one, int two) {
+    private static int uclidian(int one, int two) {
         int x1 = nodeArr[one][0];
         int y1 = nodeArr[one][1];        
         int x2 = nodeArr[two][0];
         int y2 = nodeArr[two][1];
 
-        int dist = (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-        ans = Math.min(ans, dist);
+        return (int) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
     private static void init() {
