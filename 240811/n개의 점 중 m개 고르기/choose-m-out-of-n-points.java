@@ -5,6 +5,7 @@ public class Main {
     static int ans = Integer.MAX_VALUE;
     static int[][] nodeArr;
     static int[] mArr;
+    static boolean[] visited;
 
     public static void main(String[] args) {
         init();
@@ -19,24 +20,21 @@ public class Main {
 
             for(int i = 0; i < m; i++) {
                 for(int j = i + 1; j < m; j++) {
-
-                    if(mArr[i] == mArr[j]) continue;
-                    
                     int currentDist = uclidian(mArr[i], mArr[j]);
                     tempDist = Math.max(tempDist, currentDist);
                 }
             }
-
-            if(tempDist == Integer.MIN_VALUE) return;
             
             ans = Math.min(ans, tempDist);
-            
             return;
         }
 
-        for(int i = cnt; i < n; i++) {
+        for(int i = 0; i < n; i++) {
+            if(visited[i]) continue;
+            visited[i] = true;
             mArr[cnt] = i;
             solve(cnt + 1);
+            visited[i] = false;
         }
     }
 
@@ -55,6 +53,7 @@ public class Main {
         m = sc.nextInt();
         nodeArr = new int[n][2];
         mArr = new int[m];
+        visited = new boolean[n];
 
         for(int i = 0; i < n; i++) {
             nodeArr[i][0] = sc.nextInt();
