@@ -15,17 +15,19 @@ public class Main {
 
     private static void solve(int cnt) {
         if(cnt == m) {
-            int tempDist = 0;
+            int tempDist = Integer.MIN_VALUE;
             int one = 0;
-            int two = 0;
+            int two = 1;
+
 
             for(int i = 0; i < m; i++) {
                 for(int j = i + 1; j < m; j++) {
-                    int currentDist = uclidian(i, j);
+                    if(mArr[i] == mArr[j]) continue;
+                    int currentDist = uclidian(mArr[i], mArr[j]);
                     if(currentDist > tempDist) {
                         tempDist = currentDist;
-                        one = i;
-                        two = j;
+                        one = mArr[i];
+                        two = mArr[j];
                     }
                 }
             }
