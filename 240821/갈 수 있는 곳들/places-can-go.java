@@ -32,7 +32,7 @@ public class Main {
             int x = pair.x;
             int y = pair.y;
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < 4; i++) {
                 int nx = x + delta[i][0];
                 int ny = y + delta[i][1];
 
