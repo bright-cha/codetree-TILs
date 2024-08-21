@@ -37,7 +37,7 @@ public class Main {
             x = node[0];
             y = node[1];
 
-            if (x == n - 1 && y == n - 1) {
+            if (x == n - 1 && y == m - 1) {
                 ans = 1;
                 return;
             }
