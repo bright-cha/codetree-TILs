@@ -70,6 +70,8 @@ public class Main {
             int tempx = Integer.parseInt(st.nextToken()) - 1;
             int tempy = Integer.parseInt(st.nextToken()) - 1;
             q.offer(new Pair(tempx, tempy));
+            visited[tempx][tempy] = true;
+            ans++;
         }
     }
 
