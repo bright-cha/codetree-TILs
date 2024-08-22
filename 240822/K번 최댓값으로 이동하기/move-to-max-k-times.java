@@ -1,0 +1,112 @@
+import java.util.*;
+import java.io.*;
+
+class Pair {
+    int x;
+    int y;
+
+    public Pair(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class Main {
+    static int n, k;
+    static int[] ans = new int[2];
+    static int[][] grid;
+    static boolean[][] visited;
+    static int[][] delta = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    public static void main(String[] args) throws IOException {
+        init();
+
+        while (k-- > 0) {
+            int maxValue = Integer.MIN_VALUE;
+
+            for (int i = 0; i < 4; i++) {
+                int nx = ans[0] + delta[i][0];
+                int ny = ans[1] + delta[i][1];
+
+                if (canGo(nx, ny)) {
+                    maxValue = Math.max(maxValue, grid[nx][ny]);
+                }
+            }
+
+            bfs(maxValue);
+        }
+
+        System.out.printf("%d %d", ans[0] + 1, ans[1] + 1);
+    }
+
+    public static void bfs(int maxValue) {
+        Queue<Pair> q = new ArrayDeque<>();
+        Pair maxNode = new Pair(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        boolean[][] visitedBfs = new boolean[n][n];
+
+        q.offer(new Pair(ans[0], ans[1]));
+        visited[ans[0]][ans[1]] = true;
+        visitedBfs[ans[0]][ans[1]] = true;
+
+        while (!q.isEmpty()) {
+            Pair pair = q.poll();
+            int x = pair.x;
+            int y = pair.y;
+
+            if (maxValue == grid[x][y]) {
+                if (maxNode.x > x) {
+                    maxNode.x = x;
+                    maxNode.y = y;
+                } else if (maxNode.x == x && maxNode.y > y) {
+                    maxNode.x = x;
+                    maxNode.y = y;
+                }
+            }
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + delta[i][0];
+                int ny = y + delta[i][1];
+
+                if (canGo(nx, ny) && !visitedBfs[nx][ny]) {
+                    q.offer(new Pair(nx, ny));
+                    visitedBfs[nx][ny] = true;
+                }
+            }
+        }
+
+        if (maxNode.x == Integer.MAX_VALUE) return;
+
+        ans[0] = maxNode.x;
+        ans[1] = maxNode.y;
+    }
+
+    public static boolean canGo(int nx, int ny) {
+        return inRange(nx, ny) && grid[ans[0]][ans[1]] > grid[nx][ny];
+    }
+
+    public static boolean inRange(int x, int y) {
+        return 0 <= x && x < n && 0 <= y && y < n;
+    }
+
+    public static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        k = Integer.parseInt(st.nextToken());
+        grid = new int[n][n];
+        visited = new boolean[n][n];
+
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < n; j++) {
+                grid[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        st = new StringTokenizer(br.readLine());
+
+        ans[0] = Integer.parseInt(st.nextToken()) - 1;
+        ans[1] = Integer.parseInt(st.nextToken()) - 1;
+    }
+}
