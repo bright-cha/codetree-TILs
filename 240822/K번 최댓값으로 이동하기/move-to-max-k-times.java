@@ -15,45 +15,37 @@ public class Main {
     static int n, k;
     static int[] ans = new int[2];
     static int[][] grid;
-    static boolean[][] visited;
     static int[][] delta = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public static void main(String[] args) throws IOException {
         init();
 
         while (k-- > 0) {
-            int maxValue = Integer.MIN_VALUE;
-
-            for (int i = 0; i < 4; i++) {
-                int nx = ans[0] + delta[i][0];
-                int ny = ans[1] + delta[i][1];
-
-                if (canGo(nx, ny)) {
-                    maxValue = Math.max(maxValue, grid[nx][ny]);
-                }
-            }
-
-            bfs(maxValue);
+            bfs();
         }
 
         System.out.printf("%d %d", ans[0] + 1, ans[1] + 1);
     }
 
-    public static void bfs(int maxValue) {
+    public static void bfs() {
         Queue<Pair> q = new ArrayDeque<>();
         Pair maxNode = new Pair(Integer.MAX_VALUE, Integer.MAX_VALUE);
         boolean[][] visitedBfs = new boolean[n][n];
 
         q.offer(new Pair(ans[0], ans[1]));
-        visited[ans[0]][ans[1]] = true;
         visitedBfs[ans[0]][ans[1]] = true;
+        int maxValue = Integer.MIN_VALUE;
 
         while (!q.isEmpty()) {
             Pair pair = q.poll();
             int x = pair.x;
             int y = pair.y;
 
-            if (maxValue == grid[x][y]) {
+            if (maxValue < grid[x][y] && grid[ans[0]][ans[1]] > grid[x][y]) {
+                maxValue = grid[x][y];
+                maxNode.x = x;
+                maxNode.y = y;
+            } else if (maxValue == grid[x][y]) {
                 if (maxNode.x > x) {
                     maxNode.x = x;
                     maxNode.y = y;
@@ -74,7 +66,7 @@ public class Main {
             }
         }
 
-        if (maxNode.x == Integer.MAX_VALUE) return;
+        if (maxValue == Integer.MIN_VALUE) return;
 
         ans[0] = maxNode.x;
         ans[1] = maxNode.y;
@@ -95,7 +87,6 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
         grid = new int[n][n];
-        visited = new boolean[n][n];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
