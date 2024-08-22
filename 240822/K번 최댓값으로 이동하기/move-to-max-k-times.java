@@ -41,7 +41,7 @@ public class Main {
             int x = pair.x;
             int y = pair.y;
 
-            if (maxValue < grid[x][y] && grid[ans[0]][ans[1]] > grid[x][y]) {
+            if (maxValue < grid[x][y]) {
                 maxValue = grid[x][y];
                 maxNode.x = x;
                 maxNode.y = y;
@@ -81,18 +81,23 @@ public class Main {
     }
 
     public static void init() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        k = sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        k = Integer.parseInt(st.nextToken());
         grid = new int[n][n];
 
         for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++) {
-                grid[i][j] = sc.nextInt();
+                grid[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        ans[0] = sc.nextInt() - 1;
-        ans[1] = sc.nextInt() - 1;
+        st = new StringTokenizer(br.readLine());
+
+        ans[0] = Integer.parseInt(st.nextToken()) - 1;
+        ans[1] = Integer.parseInt(st.nextToken()) - 1;
     }
 }
