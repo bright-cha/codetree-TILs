@@ -70,6 +70,7 @@ public class Main {
         return cnt;
     }
 
+    // bfs에서 활용할 q와 visited의 전처리를 위한 함수
     public static boolean[][] preprocessing() {
         boolean[][] visited = new boolean[n][n];
 
@@ -90,21 +91,17 @@ public class Main {
     }
 
     public static void init() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        n = Integer.parseInt(st.nextToken());
-        k = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        k = sc.nextInt();
+        m = sc.nextInt();
 
         grid = new int[n][n];
         startArr = new int[k][2];
 
         for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine());
-
             for (int j = 0; j < n; j++) {
-                int temp = Integer.parseInt(st.nextToken());
+                int temp = sc.nextInt();
                 grid[i][j] = temp;
 
                 if (temp == 1) {
@@ -114,10 +111,9 @@ public class Main {
         }
 
         for (int i = 0; i < k; i++) {
-            st = new StringTokenizer(br.readLine());
 
-            int tempx = Integer.parseInt(st.nextToken());
-            int tempy = Integer.parseInt(st.nextToken());
+            int tempx = sc.nextInt();
+            int tempy = sc.nextInt();
 
             startArr[i][0] = tempx - 1;
             startArr[i][1] = tempy - 1;
