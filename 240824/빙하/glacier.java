@@ -15,9 +15,11 @@ public class Main {
     static int n, m;
     static int[][] grid;
     static int[] ans = new int[2];
+    // 빙하 유무 쳌
     static boolean isIce = true;
     static Queue<Pair> q = new ArrayDeque<>();
     static int[][] delta = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    // 녹일 빙하 리스트
     static LinkedList<int[]> iceList = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
@@ -32,6 +34,7 @@ public class Main {
         System.out.println(ans[0] + " " + ans[1]);
     }
 
+    // 녹일 빙하 리스트의 빙하를 녹이는 함수
     public static void melt() {
         if (ans[1] != iceList.size()) {
             ans[1] -= iceList.size();
@@ -61,11 +64,13 @@ public class Main {
                 int ny = y + delta[i][1];
 
                 if (inRange(nx, ny) && !visited[nx][ny]) {
+                    // 바다인 경우
                     if (grid[nx][ny] == 0) {
                         visited[nx][ny] = true;
                         q.offer(new Pair(nx, ny));
                     }
 
+                    // 빙하인 경우
                     if (grid[nx][ny] == 1) {
                         iceList.add(new int[] {nx, ny});
                         visited[nx][ny] = true;
@@ -75,23 +80,22 @@ public class Main {
         }
     }
 
+    // 범위 쳌~
     public static boolean inRange(int x, int y) {
         return 0 <= x && x < n && 0 <= y && y < m;
     }
 
     public static void init() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        Scanner sc = new Scanner(System.in);
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        n = sc.nextInt();
+        m = sc.nextInt();
         grid = new int[n][m];
 
         for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine());
 
             for (int j = 0; j < m; j++) {
-                int temp = Integer.parseInt(st.nextToken());
+                int temp = sc.nextInt();
                 grid[i][j] = temp;
 
                 if (temp == 1) ans[1]++;
