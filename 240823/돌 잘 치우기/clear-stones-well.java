@@ -26,13 +26,13 @@ public class Main {
     }
 
     public static void backTracking(int cnt, int idx) {
-        if (cnt == stoneList.size()) return;
-
         if (idx == m) {
             int value = bfs();
             ans = Math.max(ans, value);
             return;
         }
+
+        if (cnt == stoneList.size()) return;
 
         int stoneX = stoneList.get(cnt)[0];
         int stoneY = stoneList.get(cnt)[1];
