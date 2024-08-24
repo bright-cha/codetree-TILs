@@ -35,19 +35,14 @@ public class Main {
 
     public static void backTracking(int idx, int cnt) {
         if (idx == n * n || cnt == k) {
-            if (cnt == k) {
-                // System.out.println("============");
-                // for (Pair pair : selectList) {
-                //     System.out.printf("%d %d \n", pair.x, pair.y);
-                // }
-                // System.out.println("============");
+            if (cnt == k) 
                 bfs();
-            }
             return;
         }
 
         selectList.add(cities[idx]);
         backTracking(idx + 1, cnt + 1);
+        selectList.remove(selectList.size() - 1);
         backTracking(idx + 1, cnt);
     }
 
@@ -98,12 +93,9 @@ public class Main {
     }
 
     public static void preprocesse() {
-        Iterator<Pair> iterator = selectList.iterator();
-        while (iterator.hasNext()) {
-            Pair city = iterator.next();
+        for (Pair city : selectList) {
             visited[city.x][city.y] = true;
             q.offer(city);
-            iterator.remove();
         }
     }
 
