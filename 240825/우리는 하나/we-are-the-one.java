@@ -19,6 +19,7 @@ public class Main {
     public static int ans = 0;
 
     public static int[][] grid = new int[MAX_N][MAX_N];
+    public static Pair[] cities;
 
     public static Queue<Pair> q = new ArrayDeque<>();
     public static List<Pair> selectList = new LinkedList<>();
@@ -33,17 +34,21 @@ public class Main {
     }
 
     public static void backTracking(int idx, int cnt) {
-        if (idx == n || cnt == k) {
-            if (cnt == k) bfs();
+        if (idx == n * n || cnt == k) {
+            if (cnt == k) {
+                // System.out.println("============");
+                // for (Pair pair : selectList) {
+                //     System.out.printf("%d %d \n", pair.x, pair.y);
+                // }
+                // System.out.println("============");
+                bfs();
+            }
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            backTracking(idx + 1, cnt);
-
-            selectList.add(new Pair(idx, i));
-            backTracking(idx + 1, cnt + 1);
-        }
+        selectList.add(cities[idx]);
+        backTracking(idx + 1, cnt + 1);
+        backTracking(idx + 1, cnt);
     }
 
     public static void bfs() {
@@ -84,7 +89,7 @@ public class Main {
 
     public static boolean canGo(int x, int y, int nx, int ny) {
         int difference = Math.abs(grid[x][y] - grid[nx][ny]);
-        
+
         return u <= difference && difference <= d;
     }
 
@@ -110,12 +115,16 @@ public class Main {
         k = Integer.parseInt(st.nextToken());
         u = Integer.parseInt(st.nextToken());
         d = Integer.parseInt(st.nextToken());
+        cities = new Pair[n * n];
+        
+        int cnt = 0;
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
 
             for (int j = 0; j < n; j++) {
                 grid[i][j] = Integer.parseInt(st.nextToken());
+                cities[cnt++] = new Pair(i, j);
             }
         }
     }
