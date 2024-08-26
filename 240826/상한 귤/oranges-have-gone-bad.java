@@ -27,12 +27,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
         bfs();
+        postProcess();
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print(ans[i][j] + " ");
             }
             System.out.println();
+        }
+    }
+
+    public static void postProcess() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (ans[i][j] == Integer.MAX_VALUE) ans[i][j] = -2;
+                if (grid[i][j] == 0) {
+                    ans[i][j] = -1;
+                }
+            }
         }
     }
 
@@ -55,8 +67,6 @@ public class Main {
                     q.offer(new Pair(nx, ny, time + 1));
                     ans[nx][ny] = time + 1;
 
-                } else if (inRange(nx, ny) && grid[nx][ny] == 0) {
-                    ans[nx][ny] = -1;
                 }
             }
         }
