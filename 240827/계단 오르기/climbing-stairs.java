@@ -2,6 +2,7 @@ import java.io.*;
  import java.util.*;
 
 public class Main {
+    public static final int MOD = 10007;
     public static final int MAX_N = 1000;
     public static int[] dp = new int[MAX_N + 1];
     public static int n;
@@ -14,15 +15,10 @@ public class Main {
         dp[3] = 1;
 
         for (int i = 4; i <= n; i++) {
-            dp[i] = dp[i - 2] + dp[i - 3];
+            dp[i] = (dp[i - 2] + dp[i - 3]) % MOD;
         }
 
-        if (dp[n] == 0) {
-            System.out.println(0);
-            return;
-
-        }
-        System.out.println(dp[n] % 10007);
+        System.out.println(dp[n]);
     }
 
     public static void init() throws IOException {
