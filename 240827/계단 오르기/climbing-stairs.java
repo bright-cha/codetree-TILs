@@ -17,6 +17,11 @@ public class Main {
             dp[i] = dp[i - 2] + dp[i - 3];
         }
 
+        if (dp[n] == 0) {
+            System.out.println(0);
+            return;
+
+        }
         System.out.println(dp[n] % 10007);
     }
 
