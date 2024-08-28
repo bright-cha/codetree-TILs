@@ -21,7 +21,8 @@ public class Main {
             }
         }
 
-        System.out.println(dp[n]);
+
+        System.out.println(Arrays.stream(dp).max().getAsInt());
     }
 
     public static void init() throws IOException {
