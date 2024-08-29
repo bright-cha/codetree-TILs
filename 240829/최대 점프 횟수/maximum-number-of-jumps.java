@@ -16,8 +16,8 @@ public class Main {
             for (int j = 0; j < i; j++) {
                 if (arr[j] == 0) continue;
 
-                int possible = j + arr[j] >= i ? 1 : 0;
-                dp[i] = Math.max(dp[i], dp[j] + possible);
+                if(j + arr[j] >= i)
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
             }
 
             if (dp[i] == 0) break;
