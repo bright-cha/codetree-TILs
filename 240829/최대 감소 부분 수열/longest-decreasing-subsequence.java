@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        dp[1] = 1;
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j < i; j++) {
                 if (arr[i] < arr[j]) {
@@ -21,7 +20,7 @@ public class Main {
             }
         }
 
-        System.out.println(Arrays.stream(dp).max().getAsInt());
+        System.out.println(Arrays.stream(dp).max().getAsInt() + 1);
     }
 
     public static void init() throws IOException {
