@@ -1,0 +1,40 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static final int MAX_N = 1000;
+    public static final int MAX_VALUE = 1000;
+
+    public static int n;
+    public static int[] arr = new int[MAX_N];
+    public static int[] dp = new int[MAX_N];
+
+    public static void main(String[] args) throws IOException {
+        init();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] == 0) continue;
+
+                int possible = i - j <= arr[j] ? 1 : 0;
+                dp[i] = Math.max(dp[i], dp[j] + possible);
+            }
+        }
+
+        // System.out.println(Arrays.toString(dp));
+
+        System.out.println(Arrays.stream(dp).max().getAsInt());
+    }
+
+    public static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+    }
+}
