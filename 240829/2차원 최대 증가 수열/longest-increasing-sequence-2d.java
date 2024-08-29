@@ -17,9 +17,10 @@ public class Main {
             for (int j = 1; j < m; j++) {
                 for (int x = 0; x < i; x++) {
                     for (int y = 0; y < j; y++) {
-                        if (grid[i][j] <= grid[x][y]) continue;
-
-                        dp[i][j] = Math.max(dp[i][j], dp[x][y] + 1);
+                        if (dp[x][y] == 0) continue;
+                        if (grid[i][j] > grid[x][y]) {
+                            dp[i][j] = Math.max(dp[i][j], dp[x][y] + 1);
+                        }
                     }
                 }
 
@@ -42,6 +43,7 @@ public class Main {
 
             for (int j = 0; j < m; j++) {
                 grid[i][j] = Integer.parseInt(st.nextToken());
+                dp[i][j] = Integer.MIN_VALUE;
             }
         }
     }
