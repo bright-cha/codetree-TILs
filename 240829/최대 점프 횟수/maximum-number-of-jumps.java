@@ -12,16 +12,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (arr[j] == 0) continue;
 
-                int possible = i - j <= arr[j] ? 1 : 0;
+                int possible = j + arr[j] >= i ? 1 : 0;
                 dp[i] = Math.max(dp[i], dp[j] + possible);
             }
-        }
 
-        // System.out.println(Arrays.toString(dp));
+            if (dp[i] == 0) break;
+        }
 
         System.out.println(Arrays.stream(dp).max().getAsInt());
     }
