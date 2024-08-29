@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
+        dp[0][0] = 1;
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < m; j++) {
                 for (int x = 0; x < i; x++) {
@@ -28,7 +29,7 @@ public class Main {
             }
         }
 
-        System.out.println(ans + 1);
+        System.out.println(ans);
     }
 
     public static void init() throws IOException {
