@@ -20,7 +20,7 @@ public class Main {
         for (int i = 3; i <= n; i++) {
             dp[i] = (dp[i - 1] * 2 + dp[i - 2] * 3) % MOD;
             for (int j = i; j >= 3; j--) {
-                dp[i] += (dp[i - j] * 2) % MOD;
+                dp[i] = (dp[i] + dp[i - j] * 2) % MOD;
             }
         }
 
