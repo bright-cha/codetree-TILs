@@ -18,7 +18,7 @@ public class Main {
         dp[2] = 7;
 
         for (int i = 3; i <= n; i++) {
-            dp[i] = dp[i - 1] * 2 + dp[i - 2] * 3;
+            dp[i] = (dp[i - 1] * 2 + dp[i - 2] * 3) % MOD;
             for (int j = 3; j <= i; j++) {
                 dp[i] += (dp[i - j] * 2) % MOD;
             }
