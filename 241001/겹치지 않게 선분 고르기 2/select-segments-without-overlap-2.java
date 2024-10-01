@@ -27,9 +27,12 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             dp[i] = 1;
-            for (int j = i + 1; j < n; j++) {
-                if (segments[i].x2 < segments[j].x1) {
-                    dp[i] += 1;
+            for (int j = 0; j < i; j++) {
+                int s = segments[i].x1;
+                int e = segments[j].x2;
+
+                if (e < s) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
         }
