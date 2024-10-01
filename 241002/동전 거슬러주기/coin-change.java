@@ -16,11 +16,13 @@ public class Main {
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 if (i >= coin[j]) {
+                    if (dp[i - coin[j]] == Integer.MAX_VALUE) {
+                        continue;
+                    }
                     dp[i] = Math.min(dp[i], dp[i - coin[j]] + 1);
                 }
             }
         }
-
         System.out.println(dp[m] == Integer.MAX_VALUE ? -1 : dp[m]);
     }
 
