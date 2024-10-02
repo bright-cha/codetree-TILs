@@ -17,7 +17,12 @@ public class Main {
             dp[i] = Math.max(numArr[i], dp[i - 1] + numArr[i]);
         }
 
-        System.out.println(dp[n]);
+        int ans = INT_MIN;
+        for (int i = 1; i <= n; i++) {
+            ans = Math.max(ans, dp[i]);
+        }
+
+        System.out.println(ans);
     }
 
     public static void init() throws IOException {
