@@ -28,6 +28,8 @@ public class Main {
 
         if (dp[m / 2]) {
             System.out.println("Yes");
+        } else {
+            System.out.println("No");
         }
     }
 
