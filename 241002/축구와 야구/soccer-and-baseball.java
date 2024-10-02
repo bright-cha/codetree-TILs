@@ -25,23 +25,45 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 2; i <= n; i++) {
             for (int j = 1; j <= SOC_TOTAL; j++) {
                 for (int k = 1; k <= BAS_TOTAL; k++) {
 
+                    if (j + k > i) continue;
+
                     // 현재 학생이 축구에 선발
+                    // 이전 학생이 야구에 선발
                     dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - 1][k] + students[i].sa);
+                    // 이전 학생이 축구에 선발
+                    dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j][k - 1] + students[i].sa);
+                    // 이전 학생이 선발되지 않음
+                    dp[i][j][k - 1] = Math.max(dp[i][j][k - 1], dp[i - 1][j - 1][k - 1] + students[i].sa);
 
                     // 현재 학생이 야구에 선발
+                    dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - 1][k] + students[i].ba);
                     dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j][k - 1] + students[i].ba);
+                    dp[i][j - 1][k] = Math.max(dp[i][j - 1][k], dp[i - 1][j - 1][k - 1] + students[i].ba);
 
                     // 현재 학생이 선발되지 않음
-                    dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j][k]);
+                    dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - 1][k]);
+                    dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j][k - 1]);
+                    dp[i][j - 1][k - 1] = Math.max(dp[i][j - 1][k - 1], dp[i - 1][j - 1][k - 1]);
+                }
+
+            }
+        }
+
+        int ans = 0;
+
+        for (int a = 1; a <= n; a++) {
+            for (int b = 0; b <= SOC_TOTAL; b++) {
+                for (int k = 0; k <= BAS_TOTAL; k++) {
+                    ans = Math.max(dp[a][b][k], ans);
                 }
             }
         }
 
-        System.out.println(dp[n][SOC_TOTAL][BAS_TOTAL]);
+        System.out.println(ans);
     }
 
     public static void init() throws IOException {
