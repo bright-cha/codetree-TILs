@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        for (int i = 2; i <= lenA; i++) {
-            for (int j = 2; j <= lenB; j++) {
+        for (int i = 1; i <= lenA; i++) {
+            for (int j = 1; j <= lenB; j++) {
                 if (a.charAt(i) == b.charAt(j)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
@@ -35,25 +35,10 @@ public class Main {
         lenA = a.length() - 1;
         lenB = b.length() - 1;
 
-        for (int i = 1; i <= lenA; i++) {
-            
-            if (a.charAt(i) != b.charAt(1)) {
-                dp[i][1] = dp[i - 1][1] + 1;
-            } else {
-                dp[i][1] = dp[i - 1][1];
-            }
-
-
-        }
-
-        for (int j = 1; j <= lenB; j++) {
-            if (a.charAt(1) != b.charAt(j)) {
-                dp[1][j] = dp[1][j - 1] + 1;
-            } else {
-                dp[1][j] = dp[1][j - 1];
-            }
-        }
-
-
+        for(int i = 1; i <= lenA; i++)
+            dp[i][0] = i;
+    
+        for(int j = 1; j <= lenB; j++)
+            dp[0][j] = j;
     }
 }
