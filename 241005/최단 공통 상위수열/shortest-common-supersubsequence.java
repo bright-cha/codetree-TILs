@@ -32,6 +32,10 @@ public class Main {
                 dp[i] = dp[i - 1] + 1;
             }
         }
+
+        for (int i = 1; i <= lenA; i++) {
+            System.out.print(dp[i] + " ");
+        }
         
         System.out.println(dp[lenA] + lenB);
     }
