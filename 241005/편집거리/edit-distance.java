@@ -24,7 +24,6 @@ public class Main {
         }
         
 
-
         System.out.println(dp[lenA][lenB]);
     }
 
