@@ -8,6 +8,7 @@ public class Main {
     public static String b = null;
 
     public static int[] dp = new int[MAX_LEN + 1];
+    public static boolean[] visited = new boolean[MAX_LEN + 1];
 
     public static void main(String[] args) throws IOException {
         init();
@@ -18,8 +19,9 @@ public class Main {
 
             for (int j = 1; j <= lenB; j++) {
 
-                if (a.charAt(i) == b.charAt(j)) {
+                if (a.charAt(i) == b.charAt(j) && !visited[j]) {
                     find = true;
+                    visited[j] = true;
                     break;
                 }
             }
