@@ -22,8 +22,8 @@ public class Main {
             }
         }
         
-        // for (int j = 1; j <= lenB; j++) {
-        //     for (int i = 1; i <= lenA; i++) {
+        // for (int i = 1; i <= lenA; i++) {
+        //     for (int j = 1; j <= lenB; j++) {
         //         System.out.print(dp[i][j] + " ");
         //     }
         //     System.out.println();
@@ -48,10 +48,14 @@ public class Main {
                 dp[i][1] = dp[i - 1][1];
             }
 
-            if (a.charAt(1) != b.charAt(i)) {
-                dp[1][i] = dp[1][i - 1] + 1;
+
+        }
+
+        for (int j = 1; j <= lenB; j++) {
+            if (a.charAt(1) != b.charAt(j)) {
+                dp[1][j] = dp[1][j - 1] + 1;
             } else {
-                dp[1][i] = dp[1][i - 1];
+                dp[1][j] = dp[1][j - 1];
             }
         }
 
