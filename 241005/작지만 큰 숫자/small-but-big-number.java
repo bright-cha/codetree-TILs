@@ -31,8 +31,9 @@ public class Main {
         for (int i = 0; i < m; i++) {
             int num = Integer.parseInt(st.nextToken());
 
-            System.out.println(ts.floor(num));
-            if (ts.contains(ts.floor(num)) != null) {
+
+            if (ts.floor(num) != null) {
+                System.out.println(ts.floor(num));
                 ts.remove(ts.floor(num));
             } else {
                 System.out.println(-1);
