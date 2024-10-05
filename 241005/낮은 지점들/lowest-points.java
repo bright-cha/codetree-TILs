@@ -12,7 +12,7 @@ public class Main {
 
         Collection<Integer> values = map.values();
 
-        int ans = 0;
+        long ans = 0L;
         for (int value : values) {
             ans += value;
         }
