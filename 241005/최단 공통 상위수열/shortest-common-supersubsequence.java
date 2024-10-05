@@ -14,15 +14,23 @@ public class Main {
 
         // i번 문자와 j번 문자가 같으면 그대로 다르면 +1;
         for (int i = 1; i <= lenA; i++) {
+            boolean find = false;
+
             for (int j = 1; j <= lenB; j++) {
+
                 if (a.charAt(i) == b.charAt(j)) {
-                    dp[i] = dp[i - 1];
-                } else {
-                    dp[i] = dp[i - 1] + 1;
+                    find = true;
+                    break;
                 }
             }
-        }
 
+            if (find) {
+                dp[i] = dp[i - 1];
+            } else {
+                dp[i] = dp[i - 1] + 1;
+            }
+        }
+        
         System.out.println(dp[lenA] + lenB);
     }
 
