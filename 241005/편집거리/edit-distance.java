@@ -17,17 +17,13 @@ public class Main {
                 if (a.charAt(i) == b.charAt(j)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
-                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]);
+                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1]) + 1;
                 }
             }
         }
         
-        // for (int i = 1; i <= lenA; i++) {
-        //     for (int j = 1; j <= lenB; j++) {
-        //         System.out.print(dp[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
+
 
         System.out.println(dp[lenA][lenB]);
     }
