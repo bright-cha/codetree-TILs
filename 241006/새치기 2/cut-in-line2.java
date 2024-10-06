@@ -121,7 +121,7 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             if (i % x == 0) {
-                lineArr[i / m] = nameArr[i];
+                lineArr[i / x] = nameArr[i];
                 continue;
             }
             
