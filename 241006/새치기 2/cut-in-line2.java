@@ -82,6 +82,7 @@ public class Main {
             switch (message.num) {
             case 1:
                 changeFirst(nodeA, nodeB);
+                popLine(nodeA);
                 pop(nodeA);
                 insertPrev(nodeA, nodeB);
                 break;
@@ -90,7 +91,6 @@ public class Main {
                 pop(nodeA);
                 break;
             case 3:
-                changeFirst(nodeA, nodeC);
                 popRangeAndInsertPrev(nodeA, nodeB, nodeC);
                 break;
             }
@@ -101,15 +101,7 @@ public class Main {
         for (int i = 0; i < m; i++) {
             if (lineArr[i] == nodeB) {
                 lineArr[i] = nodeA;
-                continue;
-            }
-
-            if (lineArr[i] == nodeA) {
-                if (nodeA.next != null) {
-                    lineArr[i] = nodeA.next;
-                } else {
-                    lineArr[i] = null;
-                }
+                return;
             }
         }
     }
@@ -153,6 +145,8 @@ public class Main {
     }
 
     public static void popRangeAndInsertPrev(Node s, Node e, Node v) {
+        changeFirst(e.next, s);
+        changeFirst(s, v);
         connect(s.prev, e.next);
 
         s.prev = e.next = null;
