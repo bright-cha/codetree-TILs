@@ -28,7 +28,7 @@ public class Main {
             pq.add(num2);
             pq.add(num3);
 
-            System.out.println(num1 * num2 * num3);
+            System.out.println((long) num1 * num2 * num3);
         }
     }
 
