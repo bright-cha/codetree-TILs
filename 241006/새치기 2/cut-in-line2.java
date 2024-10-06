@@ -81,8 +81,8 @@ public class Main {
 
             switch (message.num) {
             case 1:
-                changeFirst(nodeA, nodeB);
                 popLine(nodeA);
+                changeFirst(nodeA, nodeB);
                 pop(nodeA);
                 insertPrev(nodeA, nodeB);
                 break;
