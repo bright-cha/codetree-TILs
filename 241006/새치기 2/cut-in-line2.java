@@ -42,7 +42,10 @@ public class Main {
         init();
         makeLine();
         simulation();
+        printLine();
+    }
 
+    public static void printLine() {
         for (int i = 0; i < m; i++) {
             if (lineArr[i] != null) {
                 Node n = lineArr[i];
@@ -98,6 +101,15 @@ public class Main {
         for (int i = 0; i < m; i++) {
             if (lineArr[i] == nodeB) {
                 lineArr[i] = nodeA;
+                continue;
+            }
+
+            if (lineArr[i] == nodeA) {
+                if (nodeA.next != null) {
+                    lineArr[i] = nodeA.next;
+                } else {
+                    lineArr[i] = null;
+                }
             }
         }
     }
