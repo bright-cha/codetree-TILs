@@ -117,17 +117,26 @@ public class Main {
     }
 
     public static void makeLine() {
+        int x = n / m;
+
         for (int i = 0; i < n; i++) {
-            if (i % m == 0) {
+            if (i % x == 0) {
                 lineArr[i / m] = nameArr[i];
                 continue;
             }
-
+            
             // 2회차부터 Node 연결
-            Node s = lineArr[i / m];
+            Node s = lineArr[i / x];
             Node e = nameArr[i];
 
-            insertNext(s, e);
+            while (true) {
+                if (s.next == null) {
+                    insertNext(s, e);
+                    break;
+                }
+
+                s = s.next;
+            }
         }
     }
 
@@ -146,7 +155,7 @@ public class Main {
         u.prev = singleton;
 
         if (singleton.prev != null) {
-            u.prev.next = singleton;
+            singleton.prev.next = singleton;
         }
     }
 
