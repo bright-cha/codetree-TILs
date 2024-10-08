@@ -33,8 +33,8 @@ public class Main {
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
 
-            start = hm.get(ts.floor(start)) - 1;
-            end = hm.get(ts.floor(end));
+            start = hm.get(start) - 1;
+            end = hm.get(end);
 
             System.out.println(end - start);
         }
