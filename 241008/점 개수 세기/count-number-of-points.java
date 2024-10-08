@@ -35,18 +35,18 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
 
             if (numSet.first() <= start) {
-                start = numSet.ceiling(start);
+                start = sequenceMap.get(numSet.ceiling(start)) - 1;
             } else {
                 start = 0;
             }
 
             if (numSet.last() >= end) {
-                end = numSet.floor(end);
+                end = sequenceMap.get(numSet.floor(end));
             } else {
                 end = numSet.size();
             }
 
-            System.out.println(sequenceMap.get(end) - sequenceMap.get(start) + 1);
+            System.out.println(end - start);
         }
     }
 }
