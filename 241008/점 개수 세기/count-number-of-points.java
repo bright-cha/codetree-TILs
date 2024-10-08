@@ -34,6 +34,16 @@ public class Main {
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
 
+            // if (start > end) {
+            //     System.out.println(0);
+            //     continue;
+            // }
+
+            if (end < numSet.first() || numSet.last() < start) {
+                System.out.println(0);
+                continue;
+            }
+
             if (numSet.first() <= start) {
                 start = sequenceMap.get(numSet.ceiling(start)) - 1;
             } else {
@@ -46,10 +56,7 @@ public class Main {
                 end = numSet.size();
             }
 
-            if (end < numSet.first() || numSet.last() < start) {
-                System.out.println(0);
-                continue;
-            }
+
 
             System.out.println(end - start);
         }
