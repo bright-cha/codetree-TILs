@@ -35,13 +35,13 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
 
             if (numSet.first() <= start) {
-                start = sequenceMap.get(numSet.ceiling(start)) - 1;
+                start = sequenceMap.get(numSet.floor(start));
             } else {
                 start = 0;
             }
 
             if (numSet.last() >= end) {
-                end = sequenceMap.get(numSet.floor(end));
+                end = sequenceMap.get(numSet.ceiling(end));
             } else {
                 end = numSet.size();
             }
