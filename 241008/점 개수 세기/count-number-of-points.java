@@ -41,7 +41,7 @@ public class Main {
             }
 
             if (numSet.last() >= end) {
-                end = sequenceMap.get(numSet.ceiling(end));
+                end = sequenceMap.get(numSet.floor(end));
             } else {
                 end = numSet.size();
             }
