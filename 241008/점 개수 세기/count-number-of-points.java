@@ -35,7 +35,7 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
 
             if (numSet.first() <= start) {
-                start = numSet.ceiling(start) - 1;
+                start = numSet.ceiling(start);
             } else {
                 start = 0;
             }
@@ -46,7 +46,7 @@ public class Main {
                 end = numSet.size();
             }
 
-            System.out.println(end - start);
+            System.out.println(sequenceMap.get(end) - sequenceMap.get(start) + 1);
         }
     }
 }
