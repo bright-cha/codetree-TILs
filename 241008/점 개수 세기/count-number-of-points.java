@@ -46,6 +46,10 @@ public class Main {
                 end = numSet.size();
             }
 
+            if (end < start) {
+                System.out.println(0);
+            }
+
             System.out.println(end - start);
         }
     }
