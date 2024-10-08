@@ -46,8 +46,9 @@ public class Main {
                 end = numSet.size();
             }
 
-            if (end < numSet.first() ) {
+            if (end < numSet.first() || numSet.last() < start) {
                 System.out.println(0);
+                continue;
             }
 
             System.out.println(end - start);
