@@ -30,11 +30,22 @@ public class Main {
         }
 
         System.out.println(ans);
+
+
+        // for (int i = 0; i <= n; i++) {
+        //     System.out.print(leftSum[i] + " ");
+        // }
+        // System.out.println();
+
+        // for (int i = 0; i <= n; i++) {
+        //     System.out.print(rightSum[i] + " ");
+        // }
     }
 
     // 두 점의 택시거리 구하기
     public static int saveTaxiDistance(Pair a, Pair b) {
-        return Math.abs(a.x - b.x) + Math.abs(a.y + b.y);
+        // System.out.println(a.x + " " + a.y + " 부터 " + b.x + " " + b.y + " 까지는 " + (Math.abs(a.x - b.x) + Math.abs(a.y + b.y)));
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
     }
 
     public static void init() throws IOException {
