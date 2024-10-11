@@ -21,7 +21,7 @@ public class Main {
     public static final int MAX_VALUE = 200000;
 
     public static int n;
-    public static ArrayList<Point> points = new ArrayList<>();
+    public static Point[] points;
 
     public static void main(String[] args) throws IOException {
         init();
@@ -30,8 +30,8 @@ public class Main {
         int ans = 0;
 
         for (int i = 0; i < 2 * n; i++) {
-            int x = points.get(i).s;
-            int v = points.get(i).e;
+            int x = points[i].s;
+            int v = points[i].e;
 
             cnt += v;
             ans = Math.max(ans, cnt);
@@ -46,6 +46,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         n = Integer.parseInt(st.nextToken());
+        points = new Point[2 * n];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -53,10 +54,10 @@ public class Main {
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
 
-            points.add(new Point(s, 1));
-            points.add(new Point(e, -1));
+            points[i * 2] = new Point(s, 1);
+            points[i * 2 + 1] = new Point(e, -1);
         }
 
-        Collections.sort(points);
+        Arrays.sort(points);
     }
 }
