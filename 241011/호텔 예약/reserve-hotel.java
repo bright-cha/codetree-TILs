@@ -15,7 +15,7 @@ class Point implements Comparable<Point> {
         if (this.day != p.day) {
             return this.day - p.day;
         }
-        return p.day - this.day;
+        return p.value - this.value;
     }
 }
 
