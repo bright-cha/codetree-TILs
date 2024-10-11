@@ -12,7 +12,10 @@ class Point implements Comparable<Point> {
 
     @Override
     public int compareTo(Point p) {
-        return this.day - p.day;
+        if (this.day != p.day) {
+            return this.day - p.day;
+        }
+        return p.day - this.day;
     }
 }
 
