@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Main {
     public static final int MAX_N = 100000;
-    public static final int MAX_VALUE = 1000000000;
 
     public static int n;
     public static int[] starts = new int[MAX_N];
@@ -12,30 +11,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        int day = 0;
+        int day = 1;
         int room = 0;
         int ans = 0;
-        int start = 0;
-        int end = 0;
+        int startIdx = 0;
+        int endIdx = 0;
 
-        // for (int i = 0; i < n; i++) {
-        //     System.out.print(starts[i] + " ");
-        // }
-
-        while(day <= starts[n - 1] && day <= ends[n - 1]) {
-            day++;
-
-            while (starts[start] == day) {
+        while (day <= ends[n - 1]) {
+            // 입실일이 day인 사람들을 카운트
+            while (startIdx < n && starts[startIdx] == day) {
                 room++;
-                start++;
+                startIdx++;
             }
 
+            // 최대 방 개수 갱신
             ans = Math.max(ans, room);
 
-            while (ends[end] == day) {
+            // 퇴실일이 day인 사람들을 카운트
+            while (endIdx < n && ends[endIdx] == day) {
                 room--;
-                end++;
+                endIdx++;
             }
+
+            // 다음 날로 넘어감
+            day++;
         }
 
         System.out.println(ans);
@@ -56,14 +55,8 @@ public class Main {
             ends[i] = end;
         }
 
+        // 입실일과 퇴실일을 정렬
         Arrays.sort(starts, 0, n);
         Arrays.sort(ends, 0, n);
     }
 }
-
-// 10만 명
-// 입실일 배열
-// 퇴실일 배열
-// 입실 + 1,
-// 퇴실 - 1
-// 배열 입력 후 정렬
