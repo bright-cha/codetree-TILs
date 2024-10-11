@@ -18,17 +18,21 @@ public class Main {
         int start = 0;
         int end = 0;
 
+        // for (int i = 0; i < n; i++) {
+        //     System.out.print(starts[i] + " ");
+        // }
+
         while(day <= starts[n - 1] && day <= ends[n - 1]) {
             day++;
 
-            if (starts[start] == day) {
+            while (starts[start] == day) {
                 room++;
                 start++;
             }
 
             ans = Math.max(ans, room);
 
-            if (ends[end] == day) {
+            while (ends[end] == day) {
                 room--;
                 end++;
             }
@@ -42,6 +46,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         n = Integer.parseInt(st.nextToken());
+
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
@@ -49,7 +54,10 @@ public class Main {
 
             starts[i] = start;
             ends[i] = end;
-        }        
+        }
+
+        Arrays.sort(starts, 0, n);
+        Arrays.sort(ends, 0, n);
     }
 }
 
