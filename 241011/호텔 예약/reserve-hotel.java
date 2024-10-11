@@ -1,40 +1,39 @@
 import java.io.*;
 import java.util.*;
 
+class Point implements Comparable<Point> {
+    int day;
+    int value;
+
+    public Point(int day, int value) {
+        this.day = day;
+        this.value = value;
+    }
+
+    @Override
+    public int compareTo(Point p) {
+        return this.day - p.day;
+    }
+}
+
 public class Main {
     public static final int MAX_N = 100000;
+    public static final int MAX_VALUE = 1000000000;
 
     public static int n;
-    public static int[] starts = new int[MAX_N];
-    public static int[] ends = new int[MAX_N];
+    public static ArrayList<Point> points = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         init();
 
-        int day = 1;
         int room = 0;
         int ans = 0;
-        int startIdx = 0;
-        int endIdx = 0;
 
-        while (day <= ends[n - 1]) {
-            // 입실일이 day인 사람들을 카운트
-            while (startIdx < n && starts[startIdx] == day) {
-                room++;
-                startIdx++;
-            }
+        for (int i = 0; i < n * 2; i++) {
+            int value = points.get(i).value;
+            room += value;
 
-            // 최대 방 개수 갱신
             ans = Math.max(ans, room);
-
-            // 퇴실일이 day인 사람들을 카운트
-            while (endIdx < n && ends[endIdx] == day) {
-                room--;
-                endIdx++;
-            }
-
-            // 다음 날로 넘어감
-            day++;
         }
 
         System.out.println(ans);
@@ -51,12 +50,17 @@ public class Main {
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
 
-            starts[i] = start;
-            ends[i] = end;
+            points.add(new Point(start, 1));
+            points.add(new Point(end, -1));
         }
 
-        // 입실일과 퇴실일을 정렬
-        Arrays.sort(starts, 0, n);
-        Arrays.sort(ends, 0, n);
+        Collections.sort(points);
     }
 }
+
+// 10만 명
+// 입실일 배열
+// 퇴실일 배열
+// 입실 + 1,
+// 퇴실 - 1
+// 배열 입력 후 정렬
