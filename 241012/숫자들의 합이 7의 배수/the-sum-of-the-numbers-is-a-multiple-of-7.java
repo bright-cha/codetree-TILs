@@ -7,7 +7,7 @@ public class Main {
 
     public static int n;
     public static int[] nums = new int[MAX_N + 1];
-    public static int[] leftSums = new int[MAX_N + 1];
+    public static long[] leftSums = new long[MAX_N + 1];
 
     public static void main(String[] args) throws IOException {
         init();
