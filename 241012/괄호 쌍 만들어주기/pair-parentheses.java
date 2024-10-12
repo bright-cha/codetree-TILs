@@ -12,7 +12,7 @@ public class Main {
         init();
         preprocessing();
 
-        int cnt = 0;
+        long cnt = 0;
 
         for (int i = 0; i < strLen; i++) {
             if (cnts[i] == 2) {
