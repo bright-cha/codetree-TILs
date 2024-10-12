@@ -6,23 +6,21 @@ public class Main {
     public static String str = null;
     public static int strLen;
     public static int[] cnts = new int[MAX_LEN];
+    public static int[] closeCnts = new int[MAX_LEN];
 
     public static void main(String[] args)  throws IOException {
         init();
         preprocessing();
 
-        int openCnt = 0;
-        int closeCnt = 0;
+        int cnt = 0;
 
         for (int i = 0; i < strLen; i++) {
             if (cnts[i] == 2) {
-                openCnt++;
-            } else if (cnts[i] == -2) {
-                closeCnt++;
+                cnt += closeCnts[i];
             }
         }
 
-        System.out.println(openCnt * closeCnt);
+        System.out.println(cnt);
     }
 
     public static void preprocessing() {
@@ -45,6 +43,18 @@ public class Main {
                         cnts[i] = -2;
                     }
                     break;
+            }
+        }
+
+        if (cnts[strLen - 1] == -2) {
+            closeCnts[strLen - 1] = 1;
+        }
+
+        for (int i = strLen - 2; i >= 0; i--) {
+            if (cnts[i] == -2) {
+                closeCnts[i] = closeCnts[i + 1] + 1;
+            } else {
+                closeCnts[i] = closeCnts[i + 1];
             }
         }
     }
