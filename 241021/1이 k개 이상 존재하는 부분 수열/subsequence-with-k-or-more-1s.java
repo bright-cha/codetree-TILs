@@ -13,17 +13,17 @@ public class Main {
         int j = 0;
         int cnt = 0;
         for (int i = 0; i < n; i++) {
+            if (arr[i] == 2) continue;
+
             while (j < n && cnt < k) {
                 if (arr[j] == 1) cnt++;
                 j++;
             }
 
             if (cnt == k) {
-                ans = Math.min(ans, j - i + 1);
+                ans = Math.min(ans, j - i );
                 cnt -= 1;
-                i = j - 1;
             }
-
         }
 
         if (ans == Integer.MAX_VALUE) {
