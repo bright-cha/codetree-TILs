@@ -16,8 +16,9 @@ public class Main {
             return;
         }
 
-        for (int i = 0; i < loc.size() - 1; i++) {
-            ans = Math.min(ans, loc.get(i + 1) - loc.get(i) + 1);
+        for (int i = 0; i < loc.size(); i++) {
+            if (loc.get(i) + k >= n) break;
+            ans = Math.min(ans, loc.get(i + k - 1) - loc.get(i) + 1);
         }
 
         System.out.println(ans);
