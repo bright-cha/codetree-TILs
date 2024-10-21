@@ -19,15 +19,18 @@ public class Main {
         }
 
         int ans = Integer.MAX_VALUE;
+        int j = 0;
+        int v = 0;
         for (int i = 0; i < n; i++) {
-            int v = 0;
-            for (int j = i; j < n; j++) {
-                v += arr[i];
-                if (v >= s) {
-                    ans = Math.min(ans, j - i + 1);
-                    continue;
-                }
+            while (j < n && v < s) {
+                v += arr[j];
+                j++;
             }
+
+            if (v >= s) {
+                ans = Math.min(ans, j - i);
+            }
+            v -= arr[i];
         }
 
         if (ans == Integer.MAX_VALUE) {
