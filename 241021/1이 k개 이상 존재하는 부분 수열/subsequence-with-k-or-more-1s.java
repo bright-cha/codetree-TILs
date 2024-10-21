@@ -3,26 +3,21 @@ import java.io.*;
 
 public class Main {
     public static final int MAX_N = 1000000;
+    public static int cntOne;
     public static int n, k;
     public static int ans = Integer.MAX_VALUE;
-    public static int[] arr = new int[MAX_N];
+    public static List<Integer> loc = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         init();
 
-        for (int i = 0; i < n; i++) {
-            int cnt = 0; 
-
-            for (int j = i; j < n; j++) {
-                if (arr[j] == 1) cnt++;
-                if (cnt == k) {
-                    ans = Math.min(ans, j - i + 1);
-                }
-            }
+        if (cntOne < k) {
+            System.out.println(-1);
+            return;
         }
 
-        if (ans == Integer.MAX_VALUE) {
-            ans = -1;
+        for (int i = 0; i < loc.size() - 1; i++) {
+            ans = Math.min(ans, loc.get(i + 1) - loc.get(i) + 1);
         }
 
         System.out.println(ans);
@@ -37,7 +32,11 @@ public class Main {
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken());
+            if (num == 1) {
+                cntOne++;
+                loc.add(i);
+            }
         }
     }
 }
