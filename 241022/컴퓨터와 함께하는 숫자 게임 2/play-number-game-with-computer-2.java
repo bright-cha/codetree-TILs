@@ -40,10 +40,10 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        m = Integer.parseInt(st.nextToken());
+        m = Long.parseLong(st.nextToken());
         
         st = new StringTokenizer(br.readLine());
-        s = Integer.parseInt(st.nextToken());
-        e = Integer.parseInt(st.nextToken());
+        s = Long.parseLong(st.nextToken());
+        e = Long.parseLong(st.nextToken());
     }
 }
