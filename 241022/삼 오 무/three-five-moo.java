@@ -16,13 +16,13 @@ public class Main {
             int mid = (left + right) / 2;
             int num = (mid / 3) + (mid / 5) - (mid / 15);
 
-            if (mid - num == n) {
-                ans = mid;
-                break;
-            } else if (mid - num > n) {
+            if (mid - num < n) {
+                left = mid + 1;
+            } else if (mid - num > n || mid % 3 == 0 || mid % 5 == 0) {
                 right = mid - 1;
             } else {
-                left = mid + 1;
+                ans = mid;
+                break;
             }
 
         }
