@@ -14,15 +14,15 @@ public class Main {
         int ans = MAX_N;
         while (left <= right) {
             int mid = (left + right) / 2;
-            int num = (mid / 3) + (mid / 5) - (mid / 15) + 1;
+            int num = (mid / 3) + (mid / 5) - (mid / 15);
 
-            if (n < num || mid % 3 == 0 || mid % 5 == 0) {
+            if (mid - num == n) {
+                ans = mid;
+                break;
+            } else if (mid - num > n) {
                 right = mid - 1;
-            } else if (num < n) {
-                left = mid + 1;
             } else {
-                ans = Math.min(ans, mid);
-                right = mid - 1;
+                left = mid + 1;
             }
 
         }
