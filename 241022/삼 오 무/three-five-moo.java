@@ -16,9 +16,9 @@ public class Main {
             int mid = (left + right) / 2;
             int num = (mid / 3) + (mid / 5) - (mid / 15) + 1;
 
-            if (n < num) {
+            if (n < num || mid % 3 == 0 || mid % 5 == 0) {
                 right = mid - 1;
-            } else if (num < n || mid % 3 == 0 || mid % 5 == 0) {
+            } else if (num < n) {
                 left = mid + 1;
             } else {
                 ans = Math.min(ans, mid);
