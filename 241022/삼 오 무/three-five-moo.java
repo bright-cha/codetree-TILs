@@ -18,7 +18,7 @@ public class Main {
 
             if (mid - num < n) {
                 left = mid + 1;
-            } else if (mid - num > n || mid % 3 == 0 || mid % 5 == 0) {
+            } else if (mid - num > n) {
                 right = mid - 1;
             } else {
                 ans = mid;
