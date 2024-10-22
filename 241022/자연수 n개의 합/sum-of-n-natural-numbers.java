@@ -2,14 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static final long MAX_S = 1000000000000000000L;
+    public static final long MAX_S = 200000000000000L;
     public static long s, ans;   
 
     public static void main(String[] args) throws IOException {
         init();
 
         long left = 1;
-        long right = s;
+        long right = MAX_S;
         long ans = 0;
         while (left <= right) {
             long mid = (left + right) / 2;
