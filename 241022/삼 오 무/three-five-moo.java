@@ -11,18 +11,18 @@ public class Main {
 
         int left = 1; 
         int right = MAX_N;
-        int ans = -1;
+        int ans = MAX_N;
         while (left <= right) {
             int mid = (left + right) / 2;
             int num = (mid / 3) + (mid / 5) - (mid / 15) + 1;
 
             if (n < num) {
                 right = mid - 1;
-            } else if (num < n) {
+            } else if (num < n || mid % 3 == 0 || mid % 5 == 0) {
                 left = mid + 1;
             } else {
-                ans = mid;
-                break;
+                ans = Math.min(ans, mid);
+                right = mid - 1;
             }
 
         }
