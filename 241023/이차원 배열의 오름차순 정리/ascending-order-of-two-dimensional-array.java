@@ -12,16 +12,21 @@ public class Main {
         k = Integer.parseInt(br.readLine());
 
         int left = 1;
-        int right = n;
+        int right = n * n;
+        
         int ans = -1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            int cnt = mid * 2 - (int) Math.sqrt(mid);
+            
+            int cnt = 0;
+            for (int i = 1; i <= n; i++) {
+                cnt += Math.min(n, mid / i);
+            }
 
-            if (k < cnt) {
-                right = mid - 1;
-            } else if (cnt < k) {
+            if (cnt < k) {
                 left = mid + 1;
+            } else if (cnt > k) {
+                right = mid - 1;
             } else {
                 ans = mid;
                 break;
