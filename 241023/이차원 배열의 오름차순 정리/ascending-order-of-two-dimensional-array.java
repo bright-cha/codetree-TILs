@@ -13,10 +13,10 @@ public class Main {
 
         int left = 1;
         int right = n * n;
-        int ans = n * n;
-        
+        long ans = n * n;
+
         while (left <= right) {
-            int mid = (left + right) / 2;
+            long mid = (left + right) / 2;
             
             int cnt = 0;
             for (int i = 1; i <= n; i++) {
