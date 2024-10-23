@@ -18,8 +18,8 @@ public class Main {
             arr[i] = num;
         }
         Arrays.sort(arr, 0, n);
-
-        long left = arr[0];
+        // System.out.println(Arrays.toString(arr));
+        long left = 1;
         long right = arr[n - 1] - arr[0];
         long ans = 0;
 
