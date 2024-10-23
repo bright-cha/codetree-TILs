@@ -25,11 +25,9 @@ public class Main {
 
             if (cnt < k) {
                 left = mid + 1;
-            } else if (cnt > k) {
+            } else if (cnt >= k) {
                 right = mid - 1;
-            } else {
-                ans = mid;
-                break;
+                ans = Math.min(ans, mid);
             }
         }
 
