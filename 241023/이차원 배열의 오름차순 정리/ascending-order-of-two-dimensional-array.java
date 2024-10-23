@@ -13,8 +13,8 @@ public class Main {
 
         int left = 1;
         int right = n * n;
+        int ans = n * n;
         
-        int ans = -1;
         while (left <= right) {
             int mid = (left + right) / 2;
             
