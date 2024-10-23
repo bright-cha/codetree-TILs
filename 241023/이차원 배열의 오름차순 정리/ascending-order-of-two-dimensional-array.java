@@ -11,8 +11,8 @@ public class Main {
         n = Integer.parseInt(br.readLine());
         k = Integer.parseInt(br.readLine());
 
-        int left = 1;
-        int right = n * n;
+        long left = 1;
+        long right = n * n;
         long ans = n * n;
 
         while (left <= right) {
