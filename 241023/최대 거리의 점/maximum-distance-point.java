@@ -17,10 +17,10 @@ public class Main {
             long num = Long.parseLong(br.readLine());
             arr[i] = num;
         }
-        Arrays.sort(arr);
+        Arrays.sort(arr, 0, n);
 
-        long left = 0;
-        long right = MAX_VALUE;
+        long left = arr[0];
+        long right = arr[n - 1] - arr[0];
         long ans = 0;
 
         while (left <= right) {
