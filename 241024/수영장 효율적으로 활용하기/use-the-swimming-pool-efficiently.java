@@ -5,13 +5,12 @@ public class Main {
     public static final int MAX_N = 100000;
     public static final int MAX_M = 100000;
     public static final int MAX_TIME = 1440;
-    public static int n, m;
+    public static int n, m, left;
     public static int[] times = new int[MAX_N];
 
     public static void main(String[] args) throws IOException {
         init();
 
-        int left = 0;
         int right = n * MAX_TIME;
         int ans = Integer.MAX_VALUE;
 
@@ -52,7 +51,9 @@ public class Main {
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            times[i] = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken());
+            times[i] = num;
+            left = Math.max(left, num);
         }
     }
 }
