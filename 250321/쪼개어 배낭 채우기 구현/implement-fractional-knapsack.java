@@ -40,7 +40,7 @@ public class Main {
 
         int idx = 0;
         double ans = 0;
-        while (m > 0) {
+        while (m > 0 && idx < n) {
             if (m >= list[idx].w) {
                 ans += list[idx].v;
                 m -= list[idx].w;
