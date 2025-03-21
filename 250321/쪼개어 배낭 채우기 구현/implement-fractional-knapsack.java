@@ -3,7 +3,7 @@ import java.util.*;
 class Jewel implements Comparable<Jewel> {
     int w;
     int v;
-    float p;
+    double p;
 
     public Jewel(int w, int v) {
         this.w = w;
@@ -39,7 +39,7 @@ public class Main {
         Arrays.sort(list, 0, n);
 
         int idx = 0;
-        float ans = 0;
+        double ans = 0;
         while (m > 0) {
             if (m >= list[idx].w) {
                 ans += list[idx].v;
