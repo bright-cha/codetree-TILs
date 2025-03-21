@@ -8,12 +8,12 @@ class Jewel implements Comparable<Jewel> {
     public Jewel(int w, int v) {
         this.w = w;
         this.v = v;
-        this.p = (float) v / w;
+        this.p = (double) v / w;
     }
 
     @Override
     public int compareTo(Jewel j) {
-        return Float.compare(j.p, this.p);
+        return Double.compare(j.p, this.p);
     }
 }
 
