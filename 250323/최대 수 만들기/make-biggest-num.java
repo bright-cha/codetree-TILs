@@ -15,7 +15,7 @@ public class Main {
                 String strA = String.valueOf(a);
                 String strB = String.valueOf(b);
 
-                if (Integer.valueOf(strA + strB) > Integer.valueOf(strB + strA)) {
+                if (Long.valueOf(strA + strB) > Long.valueOf(strB + strA)) {
                     return -1;
                 } else {
                     return 1;
