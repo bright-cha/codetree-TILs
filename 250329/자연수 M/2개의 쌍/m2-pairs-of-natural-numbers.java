@@ -42,7 +42,7 @@ public class Main {
                 last = first;
             }
 
-            minCnt = Math.min(first.cnt, last.cnt);
+            int minCnt = Math.min(first.cnt, last.cnt);
 
             first.cnt -= minCnt;
             last.cnt -= minCnt;
