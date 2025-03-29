@@ -3,6 +3,21 @@ import java.io.*;
 
 // 두 자연수의 합이 가장 큰 경우의 최솟값
 
+class Pair implements Comparable<Pair> {
+    int cnt;
+    int num;
+
+    public Pair(int c, int n) {
+        this.cnt = c;
+        this.num = n;
+    }
+
+    @Override
+    public int compareTo(Pair p) {
+        return this.num - p.num;
+    }
+}
+
 public class Main {
 
     public static final int MAX_M = 1000000000;
@@ -12,17 +27,30 @@ public class Main {
 
     public static int n, m;
     public static int minSum = MAX_INTEGER;
-    public static Deque<Integer> dq;
+    public static Deque<Pair> dq;
 
     public static void main(String[] args) throws IOException {
         init();
 
         m = m / 2;
         while (m-- > 0) {
-            int first = dq.pollFirst();
-            int last = dq.pollLast();
+            Pair first = dq.pollFirst();
 
-            minSum = Math.min(first + last, minSum);
+            Pair last;
+            if (!dq.isEmpty()) {
+                last = dq.pollLast();
+            } else {
+                last = first;
+            }
+
+            minSum = Math.min(first.num + last.num, minSum);
+
+            if (--first.cnt > 0) {
+                dq.addFirst(first);
+            }
+            if (--last.cnt > 0) {
+                dq.addLast(last);
+            }
         }
 
         System.out.println(minSum);
@@ -33,7 +61,7 @@ public class Main {
 
         n = Integer.parseInt(br.readLine());
 
-        List<Integer> list = new ArrayList<>();
+        List<Pair> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             
@@ -42,9 +70,7 @@ public class Main {
 
             m += cnt;
 
-            while (cnt-- > 0) {
-                list.add(num);
-            }
+            list.add(new Pair(cnt, num));
         }
 
         list.sort(Comparator.naturalOrder());
