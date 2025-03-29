@@ -34,7 +34,6 @@ public class Main {
         m = m / 2;
         while (m-- > 0) {
             Pair first = dq.pollFirst();
-            first.cnt--;
 
             Pair last;
             if (!dq.isEmpty()) {
@@ -42,7 +41,9 @@ public class Main {
             } else {
                 last = first;
             }
-            last.cnt--;
+
+            first.cnt = Math.min(first.cnt, last.cnt);
+            last.cnt = Math.min(first.cnt, last.cnt);
 
             maxSum = Math.max(first.num + last.num, maxSum);
 
