@@ -3,14 +3,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] bCards = new int[2 * n + 1];
+        int[] bCards = new int[n];
         for (int i = 0; i < n; i++) {
-            bCards[sc.nextInt()] = 1;
+            bCards[i] = sc.nextInt();
         }
 
+        int cur = ((1 + 2 * n) * n) / 2;
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (bCards[i] == 0) {
+            cur-=bCards[i];
+
+            if (cur > 0) {
                 ans++;
             }
         }
