@@ -4,11 +4,13 @@ class Pair implements Comparable<Pair> {
     String s;
     int len;
     int cntR;
+    int length;
 
-    public Pair(String s, int len, int cntR) {
+    public Pair(String s, int len, int cntR, int length) {
         this.s = s;
         this.len = len;
         this.cntR = cntR;
+        this.length = length;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class Main {
                 }
             }
 
-            pairs[i] = new Pair(str, num, cntR);
+            pairs[i] = new Pair(str, num, cntR, len);
         }
 
         Arrays.sort(pairs, 0, n);
@@ -52,9 +54,9 @@ public class Main {
         for(int i = 0; i < n; i++) {
             Pair p = pairs[i];
 
-            for (int j = 0; j < p.s.length(); j++) {
+            for (int j = 0; j < p.length; j++) {
                 if (p.s.charAt(j) == '(') {
-                    for (int k = j + 1; k < p.s.length(); k++) {
+                    for (int k = j + 1; k < p.length; k++) {
                         if (p.s.charAt(k) == ')') {
                             score++;
                         }
