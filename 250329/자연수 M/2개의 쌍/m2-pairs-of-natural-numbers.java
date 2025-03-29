@@ -42,8 +42,10 @@ public class Main {
                 last = first;
             }
 
-            first.cnt = Math.min(first.cnt, last.cnt);
-            last.cnt = Math.min(first.cnt, last.cnt);
+            minCnt = Math.min(first.cnt, last.cnt);
+
+            first.cnt -= minCnt;
+            last.cnt -= minCnt;
 
             maxSum = Math.max(first.num + last.num, maxSum);
 
