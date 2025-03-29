@@ -25,8 +25,7 @@ public class Main {
     public static final int MAX_VALUE = 1000000000;
     public static final int MAX_INTEGER = Integer.MAX_VALUE;
 
-    public static int n, m;
-    public static int minSum = MAX_INTEGER;
+    public static int n, m, maxSum;
     public static Deque<Pair> dq;
 
     public static void main(String[] args) throws IOException {
@@ -43,7 +42,7 @@ public class Main {
                 last = first;
             }
 
-            minSum = Math.min(first.num + last.num, minSum);
+            maxSum = Math.max(first.num + last.num, maxSum);
 
             if (--first.cnt > 0) {
                 dq.addFirst(first);
@@ -53,7 +52,7 @@ public class Main {
             }
         }
 
-        System.out.println(minSum);
+        System.out.println(maxSum);
     }
 
     public static void init() throws IOException {
