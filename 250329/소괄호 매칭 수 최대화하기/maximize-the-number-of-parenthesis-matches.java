@@ -64,13 +64,11 @@ public class Main {
             for (int j = 0; j < strLen; j++) {
                 if (str.charAt(j) == '(') {
                     score += p.cntR;
+                    score += allR;
                 } else {
                     p.cntR--;
                 }
             }
-
-            // 이후 R 체크
-            score += p.cntL * allR;
         }
 
         System.out.println(score);
