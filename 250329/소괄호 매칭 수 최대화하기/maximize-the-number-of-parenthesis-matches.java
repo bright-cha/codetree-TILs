@@ -13,12 +13,7 @@ class Pair implements Comparable<Pair> {
 
     @Override
     public int compareTo(Pair p) {
-
-        int value = this.cntR - this.cntL;
-        int pV = p.cntR - p.cntL;
-
-        if (value == pV) return p.cntL - this.cntL;
-        return value - pV;
+        return p.cntL * this.cntR - this.cntL * p.cntR;
     }
 }
 
