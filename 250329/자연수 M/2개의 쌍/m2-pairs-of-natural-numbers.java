@@ -12,21 +12,20 @@ public class Main {
 
     public static int n, m;
     public static int minSum = MAX_INTEGER;
-
-    public static PriorityQueue<Integer> ascPq = new PriorityQueue<>();
-    public static PriorityQueue<Integer> descPq = new PriorityQueue<>(Comparator.reverseOrder());
+    public static Deque<Integer> dq;
 
     public static void main(String[] args) throws IOException {
         init();
 
-        for (int i = 0; i < m / 2; i++) {
-            int cur = ascPq.poll() + descPq.poll();
+        m = m / 2;
+        while (m-- > 0) {
+            int first = dq.pollFirst();
+            int last = dq.pollLast();
 
-            minSum = Math.min(cur, minSum);
+            minSum = Math.min(first + last, minSum);
         }
 
         System.out.println(minSum);
-
     }
 
     public static void init() throws IOException {
@@ -34,6 +33,7 @@ public class Main {
 
         n = Integer.parseInt(br.readLine());
 
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             
@@ -43,9 +43,12 @@ public class Main {
             m += cnt;
 
             while (cnt-- > 0) {
-                ascPq.add(num);
-                descPq.add(num);
+                list.add(num);
             }
         }
+
+        list.sort(Comparator.naturalOrder());
+
+        dq = new ArrayDeque<>(list);
     }
 }
