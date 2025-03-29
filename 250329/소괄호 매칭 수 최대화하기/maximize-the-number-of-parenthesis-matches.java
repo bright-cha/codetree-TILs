@@ -24,7 +24,8 @@ class Pair implements Comparable<Pair> {
 public class Main {
 
     public static Pair[] pairs;
-    public static int score, allR;
+    public static int score;
+    public static long allR;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
