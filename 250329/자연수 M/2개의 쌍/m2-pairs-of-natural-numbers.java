@@ -31,8 +31,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
 
-        m = m / 2;
-        while (m-- > 0) {
+        while (!dq.isEmpty()) {
             Pair first = dq.pollFirst();
 
             Pair last;
