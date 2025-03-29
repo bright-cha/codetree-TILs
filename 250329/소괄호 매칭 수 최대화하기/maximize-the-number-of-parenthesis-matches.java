@@ -15,9 +15,10 @@ class Pair implements Comparable<Pair> {
     public int compareTo(Pair p) {
 
         int value = this.cntR - this.cntL;
+        int pV = p.cntR - p.cntL;
 
-        if (value == (p.cntR - p.cntL)) return p.cntL - this.cntL;
-        return value - (p.cntR - p.cntL);
+        if (value == pV) return p.cntL - this.cntL;
+        return value - pV;
     }
 }
 
