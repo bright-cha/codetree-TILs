@@ -1,29 +1,30 @@
 import java.util.*;
 
 class Pair implements Comparable<Pair> {
-    String s;
-    int len;
+    String str;
+    int cntL;
     int cntR;
-    int length;
 
-    public Pair(String s, int len, int cntR, int length) {
-        this.s = s;
-        this.len = len;
+    public Pair(String str, int cntL, int cntR) {
+        this.str = str;
+        this.cntL = cntL;
         this.cntR = cntR;
-        this.length = length;
     }
 
     @Override
     public int compareTo(Pair p) {
-        if (this.len == p.len) return this.cntR - p.cntR;
-        return this.len - p.len;
+
+        int value = this.cntR - this.cntL;
+
+        if (value == (p.cntR - p.cntL)) return p.cntL - this.cntL;
+        return value - (p.cntR - p.cntL);
     }
 }
 
 public class Main {
 
-
     public static Pair[] pairs;
+    public static int score, allR;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -33,47 +34,44 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String str = sc.next();
 
-            int num = 0;
+            int cntL = 0;
             int cntR = 0;
+
             int len = str.length();
             for (int j = 0; j < len; j++) {
                 if (str.charAt(j) == '(') {
-                    num--;
+                    cntL++;
                 } else {
-                    num++;
                     cntR++;
+                    allR++;
                 }
             }
 
-            pairs[i] = new Pair(str, num, cntR, len);
+            pairs[i] = new Pair(str, cntL, cntR);
         }
 
         Arrays.sort(pairs, 0, n);
 
-        int score = 0;
         for(int i = 0; i < n; i++) {
             Pair p = pairs[i];
+            allR -= p.cntR;
 
-            for (int j = 0; j < p.length; j++) {
-                if (p.s.charAt(j) == '(') {
-                    for (int k = j + 1; k < p.length; k++) {
-                        if (p.s.charAt(k) == ')') {
-                            score++;
-                        }
-                    }
+            String str = p.str;
+            int strLen = p.cntL + p.cntR;
 
-                    for (int k = i + 1; k < n; k++) {
-                        score += pairs[k].cntR;
-                    }
+            // 현재 R 체크
+            for (int j = 0; j < strLen; j++) {
+                if (str.charAt(j) == '(') {
+                    score += p.cntR;
+                } else {
+                    p.cntR--;
                 }
             }
+
+            // 이후 R 체크
+            score += p.cntL * allR;
         }
 
         System.out.println(score);
-
     }
 }
-
-
-
-
